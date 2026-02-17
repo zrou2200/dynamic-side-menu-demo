@@ -1,0 +1,28 @@
+.text-icon-fill-btn {
+  padding: 0;
+  font-weight: 600 !important;
+
+  .ant-btn-icon {
+    background: $primary-clr;
+    color: $neutral-0;
+    border-radius: 50%;
+    font-size: inherit;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+  }
+
+  &.ant-btn-link {
+    color: $neutral-95 !important;
+    padding: 0;
+
+    &:hover {
+      color: $neutral-50 !important;
+    }
+  }
+}

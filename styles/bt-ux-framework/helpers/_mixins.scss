@@ -1,0 +1,204 @@
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scaleX, $scaleY) {
+  @include transform(scale($scaleX, $scaleY));
+}
+
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin skew($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin transform-origin($origin) {
+  moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin centeredbackground($imgpath, $position: center center, $repeat: no-repeat) {
+  background: {
+    image: url($imgpath);
+    position: $position;
+    repeat: $repeat;
+  }
+}
+
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
+  background-image: -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
+  background-image: -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image: linear-gradient(top, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+@mixin centeredbackground($imgpath, $position: center center, $repeat: no-repeat) {
+  background: {
+    image: url($imgpath);
+    position: $position;
+    repeat: $repeat;
+  }
+}
+
+@mixin flexbox($base: 1 1 auto, $direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex: $base;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  box-sizing: border-box;
+  // transition: all ease-in-out 300ms;
+}
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+@mixin divlink() {
+  &:hover {
+    transition: all ease-in 300ms;
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0px 0px 23px -2px rgba(0, 0, 0, 0.37);
+  }
+  &:active {
+    transition: all linear 300ms;
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0px 0px 23px -2px rgba(0, 0, 0, 0.17);
+    transform: scale(0.95);
+  }
+}
+@mixin divlink2() {
+  &:hover {
+    transition: all ease-in 300ms;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  &:active {
+    transition: all linear 300ms;
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+@mixin divlinkpressed() {
+  &:hover {
+    transition: all ease-in 300ms;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  &:active {
+    transition: all linear 300ms;
+    cursor: pointer;
+    opacity: 1;
+    transform: scale(0.9);
+  }
+}
+
+@mixin bg-border($direction, $type: normal, $size: normal) {
+  @if $direction == 'left' {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA5CAYAAAD3PEFJAAAAAXNSR0IArs4c6QAAABhJREFUGBljyCqu/s/EAARgAsRABiNbFgCKhhePsX1hWAAAAABJRU5ErkJggg==)
+      repeat-y
+      left
+      center;
+    background-size: contain;
+  }
+  @if $direction == 'right' {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA5CAYAAAD3PEFJAAAAAXNSR0IArs4c6QAAABhJREFUGBljyCqu/s/EAARgAsRABiNbFgCKhhePsX1hWAAAAABJRU5ErkJggg==)
+      repeat-y
+      right
+      center;
+    background-size: auto;
+  }
+  @if $direction == 'bottom' {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABYYAAAABCAYAAABqm3qzAAAAAXNSR0IArs4c6QAAAG5JREFUWAntl1EKACEIBY3YU3gu7+FRPHCwq9QFItifpq/oS4bpqU3Wcfe3rhHReIMBHvAXyIO7M9HMuqqOnzwYmTnPTu+hvklr9W74JY6DvgU/+DEDswcIu5DAILMQD2BQExYewAAPigAe3MLgA5Asco2NMTlQAAAAAElFTkSuQmCC);
+    @if $type == 'invert' {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAAABCAYAAADKK9KBAAAAAXNSR0IArs4c6QAAAC9JREFUKBVj+A8BvxmQAFTsP5IQA43EBspeevhtoOzAFqbYxAbKfaP2AjMTobwFAPuWbpAgMNY0AAAAAElFTkSuQmCC);
+    }
+    background-position: bottom center;
+    background-repeat: repeat-x;
+  }
+  @if $direction == 'top' {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABYYAAAABCAYAAABqm3qzAAAAAXNSR0IArs4c6QAAAG5JREFUWAntl1EKACEIBY3YU3gu7+FRPHCwq9QFItifpq/oS4bpqU3Wcfe3rhHReIMBHvAXyIO7M9HMuqqOnzwYmTnPTu+hvklr9W74JY6DvgU/+DEDswcIu5DAILMQD2BQExYewAAPigAe3MLgA5Asco2NMTlQAAAAAElFTkSuQmCC);
+    @if $type == 'invert' {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAAABCAYAAADKK9KBAAAAAXNSR0IArs4c6QAAAC9JREFUKBVj+A8BvxmQAFTsP5IQA43EBspeevhtoOzAFqbYxAbKfaP2AjMTobwFAPuWbpAgMNY0AAAAAElFTkSuQmCC);
+    }
+    background-position: top center;
+    background-repeat: repeat-x;
+  }
+  @if $direction == 'center' {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABYYAAAABCAYAAABqm3qzAAAAAXNSR0IArs4c6QAAAG5JREFUWAntl1EKACEIBY3YU3gu7+FRPHCwq9QFItifpq/oS4bpqU3Wcfe3rhHReIMBHvAXyIO7M9HMuqqOnzwYmTnPTu+hvklr9W74JY6DvgU/+DEDswcIu5DAILMQD2BQExYewAAPigAe3MLgA5Asco2NMTlQAAAAAElFTkSuQmCC);
+    @if $type == 'invert' {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAAABCAYAAADKK9KBAAAAAXNSR0IArs4c6QAAAC9JREFUKBVj+A8BvxmQAFTsP5IQA43EBspeevhtoOzAFqbYxAbKfaP2AjMTobwFAPuWbpAgMNY0AAAAAElFTkSuQmCC);
+    }
+    background-position: center center;
+    background-repeat: repeat-x;
+  }
+  @if $size == 'half' {
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+  }
+}
+
+@mixin removeliststyles() {
+  list-style-type: none;
+}
+
+@mixin standard-blue-link {
+  transition: color ease-in-out 300ms, border ease-in-out 300ms;
+  outline: none;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: $syscoblue;
+    &.selected {
+      box-shadow: 0px 0px 2px 3px rgba(104, 177, 217, 0.4);
+    }
+  }
+  &.selected,
+  &:active {
+    color: $syscoblue;
+  }
+}

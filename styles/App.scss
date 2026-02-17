@@ -1,0 +1,11 @@
+/***********************************************************
+    PRIMARY SASS FILE
+***********************************************************/
+
+@charset "UTF-8";
+
+// Initial Imports and resets
+@import "bt-ux-framework/bt-ux-framework";
+
+// Service Level Insight app styles
+@import "./soul-app/soul-app.scss";

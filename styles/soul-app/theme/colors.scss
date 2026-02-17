@@ -1,0 +1,151 @@
+/** ----- Neutrals ----- **/
+
+$neutral-0: #ffffff;
+$neutral-1: #f9f9f9;
+$neutral-3: #f1f2f3;
+$neutral-5: #edeff1;
+$neutral-10: #cfd8db;
+$neutral-20: #b0bec5;
+$neutral-30: #90a4ae;
+$neutral-40: #78909c;
+$neutral-50: #607d8b;
+$neutral-60: #546e7a;
+$neutral-70: #455a64;
+$neutral-80: #37474f;
+$neutral-90: #253238;
+$neutral-95: #151d20;
+$neutral-97: #12181b;
+$neutral-100: #000000;
+
+/** ----- Sysco Colors ----- **/
+
+/* Sysco Blues */
+$sysco-blue-50: #e6f4fb;
+$sysco-blue-100: #b0dbf1;
+$sysco-blue-200: #8acaea;
+$sysco-blue-300: #54b2e1;
+$sysco-blue-400: #33a3db;
+$sysco-blue-500: #008cd2;
+$sysco-blue-600: #007fbf;
+$sysco-blue-700: #006395;
+$sysco-blue-800: #004d74;
+$sysco-blue-900: #003b58;
+
+/* Sysco Greens */
+$sysco-green-50: #eef7ed;
+$sysco-green-100: #cbe7c6;
+$sysco-green-200: #b2dbaa;
+$sysco-green-300: #8ecb83;
+$sysco-green-400: #79c16b;
+$sysco-green-500: #57b146;
+$sysco-green-600: #4fa140;
+$sysco-green-700: #3e7e32;
+$sysco-green-800: #306127;
+$sysco-green-900: #254a1d;
+
+/** ----- Semantic Colors ----- **/
+
+/* Reds */
+$red-50: #ffebeb;
+$red-75: #ffacab;
+$red-100: #ff8988;
+$red-200: #ff5755;
+$red-300: #ff3432;
+$red-400: #b32423;
+$red-500: #9c201f;
+
+/* Oranges */
+$orange-50: #fff3e9;
+$orange-75: #ffcfa6;
+$orange-100: #ffbb81;
+$orange-200: #ff9e4b;
+$orange-300: #ff8a25;
+$orange-400: #b3611b;
+$orange-500: #9c5417;
+
+/* Yellows */
+$yellow-50: #fff9ea;
+$yellow-75: #ffe7a9;
+$yellow-100: #ffdd86;
+$yellow-200: #ffcf52;
+$yellow-300: #ffc52e;
+$yellow-400: #b38a20;
+$yellow-500: #9c781c;
+
+/* Greens */
+$green-50: #e6f9ee;
+$green-75: #96e5b9;
+$green-100: #6bda9c;
+$green-200: #2bca72;
+$green-300: #00bf55;
+$green-400: #00863b;
+$green-500: #007534;
+
+/* Blues */
+$blue-50: #e8f2ff;
+$blue-75: #a0c8fd;
+$blue-100: #78b1fd;
+$blue-200: #3e8ffc;
+$blue-300: #1778fb;
+$blue-400: #1054b0;
+$blue-500: #0e4999;
+
+/** ----- Other Colors ----- **/
+
+/* Mints */
+$mint-50: #e6f9f8;
+$mint-75: #96e5e1;
+$mint-100: #6bdad4;
+$mint-200: #2bcbc2;
+$mint-300: #00c0b5;
+$mint-400: #00867f;
+$mint-500: #00756e;
+
+/* Teals */
+$teal-50: #e6f6f9;
+$teal-75: #97dbe4;
+$teal-100: #6cccd9;
+$teal-200: #2cb6c9;
+$teal-300: #00a7be;
+$teal-400: #017585;
+$teal-500: #016674;
+
+/* Indigos */
+$indigo-50: #ededfa;
+$indigo-75: #b5b6ea;
+$indigo-100: #9798e1;
+$indigo-200: #6a6bd5;
+$indigo-300: #4a4dcc;
+$indigo-400: #35368f;
+$indigo-500: #2e2f7c;
+
+/* Purples */
+$purple-50: #f7edfb;
+$purple-75: #dcd4ee;
+$purple-100: #ce95e7;
+$purple-200: #b868dc;
+$purple-300: #aa49d5;
+$purple-400: #773395;
+$purple-500: #682d82;
+
+/* Pinks */
+$pink-50: #ffeaed;
+$pink-75: #ffa7b6;
+$pink-100: #ff8398;
+$pink-200: #ff4d6c;
+$pink-300: #ff294e;
+$pink-400: #b31d37;
+$pink-500: #9c1930;
+
+/* Browns */
+$brown-50: #f5f2ee;
+$brown-75: #d6c8ba;
+$brown-100: #c5b29d;
+$brown-200: #ac9173;
+$brown-300: #9b7956;
+$brown-400: #6d553c;
+$brown-500: #5f4a34;
+
+/* ----- Gradients ----- */
+$blue-gradient: linear-gradient(274deg, #008cd2 0%, #006395 100%);
+$green-gradient: linear-gradient(274deg, #57b146 0%, #306127 100%);

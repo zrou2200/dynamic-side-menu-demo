@@ -1,0 +1,62 @@
+.code-name-cell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .name {
+    font-weight: 500;
+  }
+
+  .code {
+    border-radius: 0.35rem;
+    background: $neutral-50;
+    color: $neutral-0;
+    font-size: 0.75rem;
+    padding: 0.125rem 0.25rem;
+    width: 2rem;
+    text-align: center;
+  }
+}
+
+.email-link {
+  color: $sysco-blue-500;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.status-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    display: inline-block;
+
+    &.status-active {
+      background-color: $success-dark;
+    }
+
+    &.status-deactivated {
+      background-color: $error-dark;
+    }
+  }
+
+  .status-text {
+    font-weight: 500;
+
+    &.status-active {
+      color: $success-dark;
+    }
+
+    &.status-deactivated {
+      color: $error-dark;
+    }
+  }
+}

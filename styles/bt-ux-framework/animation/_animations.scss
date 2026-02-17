@@ -1,0 +1,40 @@
+// CSS Animation library helper
+@import '_animate';
+
+.hover-brighten {
+  transition: ease-in-out 500ms filter;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+.hover-brighten-focus {
+  transition: ease-in-out 500ms filter, ease-in-out 200ms box-shadow;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.1);
+  }
+  &:focus {
+    box-shadow: 0 0 3px 3px rgba(0, 140, 209, 0.4);
+  }
+  &:active {
+    box-shadow: 0 0 3px 3px rgba(0, 140, 209, 0.4) !important;
+  }
+}
+.hover-enlarge {
+  transition: ease-in-out 300ms filter, ease-in-out 500ms transform;
+  &:hover {
+    filter: brightness(1.1);
+    transform: scale(1.03, 1.03);
+  }
+}
+
+.link-style-1 {
+  transition: ease-in-out 500ms filter, ease-in-out 500ms transform;
+  &:hover {
+    filter: brightness(1.1);
+  }
+  &:active {
+    filter: brightness(1.1);
+    transform: scale(1.2, 1.2);
+  }
+}

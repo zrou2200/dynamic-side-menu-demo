@@ -1,0 +1,53 @@
+/* ----- Primary ----- */
+$primary-clr: $sysco-green-500;
+$primary-clr-light: $sysco-green-50;
+$primary-clr-dark: $sysco-green-900;
+
+/* ----- Secondary ----- */
+$secondary-clr: $sysco-blue-500;
+$secondary-clr-light: $sysco-blue-50;
+$secondary-clr-dark: $sysco-blue-900;
+
+/* ----- Background -----*/
+$background-default: $neutral-0; //App Background
+$background-navigation: $neutral-1;
+$background-card: $neutral-0;
+$background-hover: $neutral-1;
+
+/* ----- Text Colors ----- */
+$txt-primary: $neutral-95; //Headings
+$txt-primary-hover: $neutral-50;
+$txt-secondary: $neutral-50; //Paragraph
+$txt-disabled: $neutral-30;
+$txt-error: $red-300;
+
+/* Hyperlinks */
+$txt-link-default: $sysco-blue-500;
+$txt-link-visited: $indigo-200;
+$txt-link-hover: $sysco-blue-300;
+$txt-link-active: $sysco-blue-500;
+
+/* ----- Border ----- */
+$border-default: $neutral-10;
+$border-hover: $sysco-blue-100;
+$border-active: $sysco-blue-300;
+
+/* ----- Tables ----- */
+$table-header-bg: $neutral-3;
+$table-header-txt: $neutral-60;
+$table-data-bg: $neutral-0;
+$table-data-txt: $neutral-95;
+
+/** ----- Feedback ----- **/
+
+/* Green */
+$success-light: $sysco-green-50;
+$success-dark: $sysco-green-500;
+
+/* Red */
+$error-light: $red-50;
+$error-dark: $red-300;
+
+/* Warning */
+$warning-light: $orange-50;
+$warning-dark: $orange-300;

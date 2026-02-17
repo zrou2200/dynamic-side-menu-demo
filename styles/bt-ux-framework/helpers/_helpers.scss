@@ -1,0 +1,56 @@
+@import "_normalize";
+@import "_browserdetection";
+@import "_mixins";
+@import "_responsive";
+
+//Clearfix
+.clear {
+  clear: both;
+}
+
+//Spacer div which pushes elements in either direction based on flex-direction
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+//Classes to show/hide elements
+.hide,
+.none {
+  display: none !important;
+}
+.hide-blockmode {
+  visibility: hidden !important;
+}
+.show {
+  display: flex !important;
+  opacity: 1;
+}
+.show-blockmode {
+  display: block !important;
+}
+
+//Z-index levels
+$bringToTop: 10000;
+$midLevel: 2;
+$normalLevel: 1;
+
+//Useful for popups and dropdowns
+.backgroundClickContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: $midLevel;
+}
+
+//Enable Text selection
+.enableSelection {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -o-user-select: initial;
+  user-select: initial;
+}

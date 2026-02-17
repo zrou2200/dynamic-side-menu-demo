@@ -1,0 +1,28 @@
+.table-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.diagram-row {
+  display: flex;
+  gap: 16px;
+}
+
+.diagram-cell {
+  flex: 1;
+  min-width: 130px;
+  max-width: 200px;
+
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 8px;
+
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.cell-line {
+  font-size: 14px;
+  line-height: 1.4;
+}

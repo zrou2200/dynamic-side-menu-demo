@@ -1,0 +1,20 @@
+//This is used to detect unsupported browsers and show a blocking message
+
+//Flexbox is a core css layouting feature used across all applications, without support for it browsers may render layouts incorrectly.
+@supports not (display: flex) {
+  body::after {
+    content: '⚠ Sorry this browser is not supported. Please try with the latest version of either Chrome, Safari or Firefox.';
+    color: white;
+    position: fixed;
+    padding: 20px;
+    font-size: 20px;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.8;
+    width: 100%;
+    box-sizing: border-box;
+    height: 1000px;
+    z-index: 1000000000;
+  }
+}
