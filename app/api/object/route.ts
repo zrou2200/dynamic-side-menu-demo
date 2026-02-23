@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import oracledb from 'oracledb';
-import { buildMenuTree } from '@/lib/menu';
-import { MenuItem, SWMS_Object } from '@/lib/types';
+import { SWMS_Object } from '@/lib/types';
+
 
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
@@ -17,24 +17,18 @@ export async function GET() {
         });
 
 
-        const result = await connection.execute<MenuItem>(`
-            SELECT PK_ML_MODULES as "id",
-                    PARENTMENU as "parent_name",
-                    SUBMENU as "route", 
-                    MENULABEL as "label",
-                    ORDERIN as "sort_order",
-                    COLOR AS "color",
-                    OBJECT_URL as "object_url"
-            FROM SWMS.SWMS_DOCUMENTS
+        const result = await connection.execute<SWMS_Object>(`
+            SELECT OBJECT_TYPE as "object_name",
+                    COUNTS as "count"
+            FROM SWMS.V_SWMS_OBJECT_COUNTS
         `);
 
-        const rows = (result.rows  ?? []) as MenuItem[];
-        const tree = buildMenuTree(rows);
-        return NextResponse.json(tree);
+        const rows = (result.rows  ?? []) as SWMS_Object[];
+        return NextResponse.json(rows);
 
     } catch (error) {
         console.error('Database error:', error);
-        return NextResponse.json({ error: 'Failed to fetch menu data' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to fetch object data' }, { status: 500 });
 
     } finally {
         if (connection) {

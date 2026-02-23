@@ -1,21 +1,11 @@
-export interface MenuItem {
-  id: number;
-  parent_name?: string;
-  route: string;
-  label: string;
-  sort_order: number;
-  object_url?: string;
-  children?: MenuItem[];
-}
-
-
+import { MenuItem } from "./types";
 
 export function buildMenuTree(items: MenuItem[]): MenuItem[] { 
   //console.log('Building menu tree from items:', items); 
   const map = new Map<number, MenuItem>(); 
   const roots: MenuItem[] = []; 
   
-  items.forEach(item => map.set(item.id, { ...item, children: [] })); 
+  items.forEach(item => map.set(item.id, { ...item, type: "menu", children: [] })); 
   //console.log('Menu item map:', map);
   
   map.forEach(item => { 

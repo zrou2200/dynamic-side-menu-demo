@@ -7,23 +7,13 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { MenuItem } from '../../lib/types';
 
 
 
 const { Sider } = Layout;
 const { Title } = Typography;
 
-export interface MenuItem {
-  id: number;
-  label: string;
-  route: string;
-  parent_menu: string;
-  sort_order?: number;
-  object_url?: string;
-  children?: MenuItem[];
-}
 
 const buildAntdMenuItems = (items: MenuItem[]): MenuProps['items'] =>
   items.map(item => ({
@@ -45,16 +35,8 @@ const buildAntdMenuItems = (items: MenuItem[]): MenuProps['items'] =>
     })),
 }));
 
-export default function SideMenu() {
-    const [menu, setMenu] = useState<MenuItem[]>([]);
-    
-    const router = useRouter();
+export default function SideMenu({ menu }: { menu: MenuItem[] }) {
 
-    useEffect(() => {
-        fetch('/api/menu')
-        .then(res => res.json())
-        .then(setMenu);
-    }, []);
   
     return (
     <Sider width="18.75rem" className="app-navigation">

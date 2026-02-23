@@ -1,15 +1,35 @@
+'use client';
+
 import { ConfigProvider, Layout } from 'antd';
 import SideMenu from './components/SideMenu';
 import Image from 'next/image';
 import logo from '../styles/resources/images/SWMSAtAGlance.png';
+import { menuToColumns } from '@/lib/menuLayout';
+import { ColumnCell, MenuItem } from '@/lib/types';
+import { useState, useEffect } from 'react';
 
 
 export default function HomePage() {
+  const [columns, setColumns] = useState<ColumnCell[]>([]);
+  const [menu, setMenu] = useState<MenuItem[]>([]);
+  
+  
+  useEffect(() => {
+    fetch('/api/menu')
+      .then(r => r.json())
+      .then(menuTree => {
+        const computedColumns = menuToColumns(menuTree);
+        setColumns(computedColumns);
+        setMenu(menuTree);
+      });
+  }, []);
+  
+  
   return (
      
      <div style={{ position: 'relative', zIndex: 1 }}>
       <Layout >
-        <SideMenu />
+        <SideMenu menu={menu}/>
 
         <Layout>
           
