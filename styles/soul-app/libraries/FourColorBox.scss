@@ -37,7 +37,7 @@
 
 .menu-main-title {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
   border-bottom: 1px solid #eee;
   padding-bottom: 6px;
@@ -53,12 +53,12 @@
 
 .menu-subgroup-title {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 3px;
 }
 
 .menu-sub-line {
-  font-size: 10px;
+  font-size: 12px;
   padding: 1px 0;
 }
 
@@ -73,4 +73,118 @@
   margin-bottom: 24px;
   color: $secondary-clr;
   padding-bottom: 50px;
+}
+
+.erp-diagram {
+  margin-top: 24px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  padding: 18px;
+  background: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.erp-diagram-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  color: $secondary-clr;
+  text-align: center;
+}
+
+.erp-diagram-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.erp-diagram-card {
+  flex: 1 1 0;
+  min-width: 120px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #f5faff;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.erp-card-label {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.erp-card-mapped {
+  font-size: 12px;
+  color: #666;
+}
+
+.apcom-connectors {
+  margin-top: 8px;
+}
+
+.apcom-connector-cell {
+  min-height: 60px;
+}
+
+.apcom-connector-cell--active {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 8px;
+}
+
+.apcom-single-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apcom-labels {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.apcom-label {
+  font-size: 11px;
+  font-weight: 600;
+  background: #e6f4fb;
+  color: $secondary-clr;
+  border: 1px solid $secondary-clr;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.apcom-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.apcom-arrow-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: $secondary-clr;
+}
+
+.apcom-arrow-head {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid $secondary-clr;
 }
