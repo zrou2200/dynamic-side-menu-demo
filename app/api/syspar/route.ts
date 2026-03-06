@@ -20,11 +20,11 @@ export async function GET() {
         const result = await connection.execute<SYSPAR_Object>(`
             SELECT SYSTEMPARAMETER as "syspar",
                     PARAMVALUE as "param_value",
-                    "DESRIPTION" as "description",
-                    "APP_NAME" as "mapped_to",
-                    "CANOPCOCHANGEIT" as "can_opco_change_it",
-                    'SYS_CONFIG_HELP' as "config_help_text",
-                    "SEQNC" as "sequence"
+                    DESRIPTION as "description",
+                    APP_NAME as "mapped_to",
+                    CANOPCOCHANGEIT as "can_opco_change_it",
+                    SYS_CONFIG_HELP as "config_help_text",
+                    SEQNC as "sequence"
             FROM SWMS.V_SYSPARS
         `);
 

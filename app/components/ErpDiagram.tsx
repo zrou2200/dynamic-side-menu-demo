@@ -20,7 +20,7 @@ export default function ErpDiagram({ docs }: ErpDiagramProps) {
         {erpDocs.map(erp => (
           <div key={erp.value_code} className="erp-diagram-card">
             <div className="erp-card-label">{erp.description}</div>
-            <div className="erp-card-mapped">{erp.mapped_to}</div>
+            {/* <div className="erp-card-mapped">{erp.mapped_to}</div> */}
           </div>
         ))}
       </div>

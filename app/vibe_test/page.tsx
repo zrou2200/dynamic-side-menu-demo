@@ -6,8 +6,12 @@ import SideMenuTest from '../components/SideMenuTest';
 import CollapsibleSubgroup from '../components/CollapsibleSubgroup';
 import ErpDiagram from '../components/ErpDiagram';
 import ApcomConnectors from '../components/ApcomConnectors';
+import InterfaceConnectors from '../components/InterfaceConnectors';
+import InterfaceBox from '../components/InterfaceBox';
+import SysparBox from '../components/SysparBox';
+import AuthBox from '../components/AuthBox';
 import { menuToColumns } from '../../lib/menuLayout';
-import { ColumnCell, SWMS_Object, MenuItem, DOC_Object, SubmenuGroup } from '../../lib/types';
+import { ColumnCell, SWMS_Object, MenuItem, DOC_Object, SubmenuGroup, SYSPAR_Object } from '../../lib/types';
 
 export default function VibeTestPage() {
   const [columns, setColumns] = useState<ColumnCell[]>([]);
@@ -15,6 +19,7 @@ export default function VibeTestPage() {
   const [objectData, setObjectData] = useState<SWMS_Object[]>([]);
   const [docsData, setDocsData] = useState<DOC_Object[]>([]);
   const [siderCollapsed, setSiderCollapsed] = useState(false);
+  const [sysparData, setSysparData] = useState<SYSPAR_Object[]>([]);
 
   useEffect(() => {
     fetch('/api/menu')
@@ -42,6 +47,29 @@ export default function VibeTestPage() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch('/api/syspar')
+      .then(r => r.json())
+      .then((syspars: SYSPAR_Object[]) => {
+        setSysparData(syspars);
+      });
+  }, []);
+
+  // Convert raw type_code values (e.g. "TRANS_TYPE", "AUTH") to readable headings
+  const TYPE_CODE_LABELS: Record<string, string> = {
+    TRANS_TYPE: 'Transactions',
+    AUTH:       'Authorizations',
+    INTR:       'Interfaces',
+    ERP:        'ERP Systems',
+    APCOM:      'APCOM Connectors',
+  };
+  const humanizeTypeCode = (code: string): string =>
+    TYPE_CODE_LABELS[code] ??
+    code
+      .replace(/_/g, ' ')
+      .toLowerCase()
+      .replace(/\b\w/g, c => c.toUpperCase());
+
   // Build a lookup: column id -> all possible identifiers (route, label, id)
   // so we can match mapped_to against any of them
   const columnIdentifiers = new Map<string, Set<string>>();
@@ -64,6 +92,18 @@ export default function VibeTestPage() {
     return acc;
   }, {});
 
+  // Group syspars by mapped_to, matched to columns via identifiers
+  const sysparsByColumn = new Map<string, SYSPAR_Object[]>();
+  for (const sp of sysparData) {
+    const mappedTo = sp.mapped_to ?? '';
+    for (const [colId, ids] of columnIdentifiers.entries()) {
+      if (ids.has(mappedTo)) {
+        if (!sysparsByColumn.has(colId)) sysparsByColumn.set(colId, []);
+        sysparsByColumn.get(colId)!.push(sp);
+      }
+    }
+  }
+
   // Merge doc-based submenu groups into each column
   const enrichedColumns: ColumnCell[] = columns.map(col => {
     // Match mapped_to against route, label, or id
@@ -81,13 +121,13 @@ export default function VibeTestPage() {
     }
 
     const docGroups: SubmenuGroup[] = Object.entries(mergedTypeCodeGroups)
-      .filter(([typeCode]) => typeCode !== 'APCOM')
+      .filter(([typeCode]) => typeCode !== 'APCOM' && typeCode !== 'INTR' && typeCode !== 'AUTH')
       .map(
         ([typeCode, docs], i) => {
           const sorted = docs.sort((a, b) => (a.sequence ?? Infinity) - (b.sequence ?? Infinity));
           return {
             id: `${col.id}-doc-${i}`,
-            title: typeCode,
+            title: humanizeTypeCode(typeCode),
             lines: sorted.map(d => d.description || d.value_code),
             maxVisible: 6,
           };
@@ -96,9 +136,20 @@ export default function VibeTestPage() {
 
     return {
       ...col,
-      groups: [...col.groups, ...docGroups],
+      groups: [...col.groups.slice(1), ...docGroups],
     };
   });
+
+  // Group AUTH docs by column id
+  const authsByColumn = new Map<string, DOC_Object[]>();
+  for (const doc of docsData.filter(d => d.type_code === 'AUTH')) {
+    for (const [colId, ids] of columnIdentifiers.entries()) {
+      if (ids.has(doc.mapped_to ?? '')) {
+        if (!authsByColumn.has(colId)) authsByColumn.set(colId, []);
+        authsByColumn.get(colId)!.push(doc);
+      }
+    }
+  }
 
   return (
     <Layout>
@@ -113,42 +164,71 @@ export default function VibeTestPage() {
             alignItems: 'stretch',
           }}
         >
-          {enrichedColumns.map(column => (
-            <div
-              key={column.id}
-              className="menu-cell"
-              style={{
-                background: column.color,
-                maxWidth: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <div className="menu-main-title">{column.title}</div>
+          {enrichedColumns.map(column => {
+            const colSyspars = sysparsByColumn.get(column.id) ?? [];
+            const colAuths = authsByColumn.get(column.id) ?? [];
+            const isTechStack = column.id === '18001';
+            return (
+              <div
+                key={column.id}
+                className="menu-cell"
+                style={{
+                  background: column.color,
+                  maxWidth: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div className="menu-main-title">
+                  {column.title}
+                  {!isTechStack && colAuths.length > 0 && (
+                    <AuthBox auths={colAuths} color={column.color} />
+                  )}
+                </div>
 
-              {column.groups.map(group => (
-                <CollapsibleSubgroup key={group.id} group={group} />
-              ))}
+                {colSyspars.length > 0 && (
+                  <SysparBox syspars={colSyspars} color={column.color} />
+                )}
 
-              {column.id === '18001' && (
-                <CollapsibleSubgroup
-                  group={{
-                    id: '18888',
-                    title: 'SWMS Database Objects',
-                    lines: objectData.map(obj => `${obj.count}   ${obj.object_name}`),
-                  }}
-                />
-              )}
-            </div>
-          ))}
+                {column.groups.map(group => (
+                  <CollapsibleSubgroup key={group.id} group={group} />
+                ))}
+
+                {column.id === '18001' && (
+                  <CollapsibleSubgroup
+                    group={{
+                      id: '18888',
+                      title: 'SWMS Database Objects',
+                      lines: objectData.map(obj => `${obj.count}   ${obj.object_name}`),
+                    }}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
         <ApcomConnectors
           docs={docsData}
           columnCount={enrichedColumns.length}
           columnIds={enrichedColumns.map(c => c.id)}
           columnIdentifiers={columnIdentifiers}
+          columnColors={new Map(enrichedColumns.map(c => [c.id, c.color ?? '#008cd2']))}
         />
         <ErpDiagram docs={docsData} />
+        <InterfaceConnectors
+          docs={docsData}
+          columnCount={enrichedColumns.length}
+          columnIds={enrichedColumns.map(c => c.id)}
+          columnIdentifiers={columnIdentifiers}
+          columnColors={new Map(enrichedColumns.map(c => [c.id, c.color ?? '#008cd2']))}
+        />
+        <InterfaceBox
+          docs={docsData}
+          columnIds={enrichedColumns.map(c => c.id)}
+          columnIdentifiers={columnIdentifiers}
+          columnColors={new Map(enrichedColumns.map(c => [c.id, c.color ?? '#008cd2']))}
+          columnCount={enrichedColumns.length}
+        />
       </div>
     </Layout>
   );

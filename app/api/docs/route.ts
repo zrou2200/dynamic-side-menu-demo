@@ -20,11 +20,11 @@ export async function GET() {
         const result = await connection.execute<DOC_Object>(`
             SELECT TYPE_CODE as "type_code",
                     VALUE_CODE as "value_code",
-                    "DESCRIPTION" as "description",
-                    "MAPPED_TO" as "mapped_to",
-                    "CREATE_USER" as "create_user",
-                    'CREATE_DATE' as "create_date",
-                    "SEQNC" as "sequence"
+                    DESCRIPTION as "description",
+                    MAPPED_TO as "mapped_to",
+                    CREATE_USER as "create_user",
+                    CREATE_DATE as "create_date",
+                    SEQNC as "sequence"
             FROM SWMS.DOCS_LISTS
         `);
 
